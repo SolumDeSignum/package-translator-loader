@@ -15,11 +15,6 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'solumdesignum');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'solumdesignum');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -33,12 +28,18 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/package-translator-loader.php', 'package-translator-loader');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/package-translator-loader.php',
+            'package-translator-loader'
+        );
 
         // Register the service the package provides.
-        $this->app->singleton('package-translator-loader', function ($app) {
-            return new PackageTranslatorLoader;
-        });
+        $this->app->singleton(
+            'package-translator-loader',
+            function ($app) {
+                return new PackageTranslatorLoader($app);
+            }
+        );
     }
 
     /**
@@ -46,7 +47,7 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return ['package-translator-loader'];
     }
@@ -59,26 +60,12 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
     protected function bootForConsole(): void
     {
         // Publishing the configuration file.
-        $this->publishes([
-            __DIR__.'/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
-        ], 'package-translator-loader.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/solumdesignum'),
-        ], 'package-translator-loader.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/solumdesignum'),
-        ], 'package-translator-loader.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/solumdesignum'),
-        ], 'package-translator-loader.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
+        $this->publishes(
+            [
+                __DIR__ . '/../config/package-translator-loader.php' =>
+                    config_path('package-translator-loader.php'),
+            ],
+            'package-translator-loader'
+        );
     }
 }

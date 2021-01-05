@@ -3,5 +3,5 @@
 declare(strict_types=1);
 
 return [
-    'segment' => 1
+    'run' => "I am running.",
 ];

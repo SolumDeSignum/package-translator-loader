@@ -1,57 +1,44 @@
-# PackageTranslatorLoader
+[![StyleCI](https://github.styleci.io/repos/changeME/shield?branch=master)](https://github.styleci.io/repos/145921620)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/solumdesignum/package-translator-loader/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/solumdesignum/package-translator-loader/?branch=master)
+[![Total Downloads](https://poser.pugx.org/solumdesignum/package-translator-loader/downloads)](https://packagist.org/packages/solumdesignum/package-translator-loader)
+[![Latest Stable Version](https://poser.pugx.org/solumdesignum/package-translator-loader/v/stable)](https://packagist.org/packages/solumdesignum/package-translator-loader)
+[![Latest Unstable Version](https://poser.pugx.org/solumdesignum/package-translator-loader/v/unstable)](https://packagist.org/packages/solumdesignum/package-translator-loader)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
+## Introduction
+Laravel PackageTranslatorLoader is translations loader that will help to   
+translation your package fully (Finally about time, I would say!!!).
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
 
 ## Installation
-
-Via Composer
-
-``` bash
-$ composer require solumdesignum/package-translator-loader
+To get started, install ReComposer using the Composer package manager:
+```shell
+composer require solumdesignum/package-translator-loader
 ```
 
-## Usage
+### Features
+The configuration file contains configurations.
+```php
+<?php
 
-## Change log
+declare(strict_types=1);
 
-Please see the [changelog](changelog.md) for more information on what has changed recently.
+return [
+    'segment' => 1
+];
+````
 
-## Testing
-
-``` bash
-$ composer test
-```
+# Usage
+TBA
 
 ## Contributing
-
-Please see [contributing.md](contributing.md) for details and a todolist.
+Thank you for considering contributing to the Laravel PackageTranslatorLoader. You can read the contribution guidelines [here](constributing.md)
 
 ## Security
-
-If you discover any security related issues, please email author email instead of using the issue tracker.
+If you discover any security-related issues, please email to [Solum DeSignum](mailto:oskars_germovs@inbox.lv).
 
 ## Credits
-
-- [author name][link-author]
-- [All Contributors][link-contributors]
+- [Oskars Germovs](https://github.com/Faks)
 
 ## License
-
-license. Please see the [license file](license.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/solumdesignum/package-translator-loader.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/solumdesignum/package-translator-loader.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/solumdesignum/package-translator-loader/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/solumdesignum/package-translator-loader
-[link-downloads]: https://packagist.org/packages/solumdesignum/package-translator-loader
-[link-travis]: https://travis-ci.org/solumdesignum/package-translator-loader
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/solumdesignum
-[link-contributors]: ../../contributors
+Laravel PackageTranslatorLoader is open-sourced software licensed under the [MIT license](license.md)

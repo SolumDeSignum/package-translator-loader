@@ -10,6 +10,8 @@ If you want to contribute but do not know where to start, this list provides som
 - Remove rewriteRules.php
 - Set up TravisCI, StyleCI, ScrutinizerCI
 - Write a comprehensive ReadMe
+- Quality: PSR-12
+- Quality: PHPStan: level 8
 
 ## Pull Requests
 

@@ -1,32 +1,48 @@
 {
     "name": "solumdesignum/package-translator-loader",
-    "description": ":package_description",
-    "license": "license",
+    "description": "Laravel PackageTranslatorLoader is translations loader.",
+    "keywords": [
+        "laravel-package-translator-toade",
+        "PackageTranslatorLoader",
+        "package-translator-toader",
+        "package",
+        "translator",
+        "loader",
+        "laravel"
+    ],
+    "license": "MIT",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "Oskars Germovs",
+            "email": "oskars_germovs@inbox.lv",
+            "homepage": "https://solum-designum.eu"
         }
     ],
     "homepage": "https://github.com/solumdesignum/package-translator-loader",
-    "keywords": ["Laravel", "PackageTranslatorLoader"],
     "require": {
-        "illuminate/support": "~5|~6|~7"
+        "php": "^7.4|^8.0|^8.1",
+        "illuminate/support": "~5|~6|~7|~8|~9"
     },
     "require-dev": {
-        "phpunit/phpunit": "~9.0",
-        "orchestra/testbench": "~5|~6"
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "~3|~4|~5|~6|~7"
     },
     "autoload": {
         "psr-4": {
             "SolumDeSignum\\PackageTranslatorLoader\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "SolumDeSignum\\PackageTranslatorLoader\\Tests\\": "tests"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "phpunit --coverage-html coverage"
     },
     "extra": {
         "laravel": {
@@ -34,11 +50,12 @@
                 "SolumDeSignum\\PackageTranslatorLoader\\PackageTranslatorLoaderServiceProvider"
             ],
             "aliases": {
-                "PackageTranslatorLoader": "SolumDeSignum\\PackageTranslatorLoader\\Facades\\PackageTranslatorLoader"
+                "PackageTranslatorLoader": "SolumDeSignum\\PackageTranslatorLoader\\Facades\\PackageTranslatorLoaderFacade"
             }
         },
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.0-dev",
+            "dev-dev": "1.x-dev"
         }
     }
 }
