@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace SolumDeSignum\PackageTranslatorLoader;
 
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Translation\FileLoader;
-use Illuminate\Translation\Translator;
-
 use function app;
 use function config;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Filesystem\Filesystem;
+
+use Illuminate\Translation\FileLoader;
+use Illuminate\Translation\Translator;
 
 class PackageTranslatorLoader
 {

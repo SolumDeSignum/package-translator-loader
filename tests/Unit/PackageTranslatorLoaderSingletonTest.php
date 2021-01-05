@@ -10,17 +10,6 @@ use SolumDeSignum\PackageTranslatorLoader\PackageTranslatorLoaderServiceProvider
 
 class PackageTranslatorLoaderSingletonTest extends TestCase
 {
-    /**
-     * @param Application $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app): array
-    {
-        return [
-            PackageTranslatorLoaderServiceProvider::class,
-        ];
-    }
 
     /**
      * @test
@@ -52,5 +41,16 @@ class PackageTranslatorLoaderSingletonTest extends TestCase
             );
         self::assertIsString($__);
         self::assertSame("Es strādāju.", $__);
+    }
+    /**
+     * @param Application $app
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app): array
+    {
+        return [
+            PackageTranslatorLoaderServiceProvider::class,
+        ];
     }
 }
