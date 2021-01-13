@@ -1,4 +1,4 @@
-[![StyleCI](https://github.styleci.io/repos/changeME/shield?branch=master)](https://github.styleci.io/repos/145921620)
+[![StyleCI](https://github.styleci.io/repos/329452333/shield?branch=master)](https://github.styleci.io/repos/329452333)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/solumdesignum/package-translator-loader/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/solumdesignum/package-translator-loader/?branch=master)
 [![Total Downloads](https://poser.pugx.org/solumdesignum/package-translator-loader/downloads)](https://packagist.org/packages/solumdesignum/package-translator-loader)
 [![Latest Stable Version](https://poser.pugx.org/solumdesignum/package-translator-loader/v/stable)](https://packagist.org/packages/solumdesignum/package-translator-loader)
