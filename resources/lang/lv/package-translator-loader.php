@@ -3,5 +3,5 @@
 declare(strict_types=1);
 
 return [
-    'run' => "Es strādāju.",
+    'run' => 'Es strādāju.',
 ];

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 use Illuminate\Contracts\Foundation\Application;
 
-if (! \function_exists('translator')) {
+if (!\function_exists('translator')) {
     /**
      * @param string|null $translator
      * @param string|null $key
      *
      * @throws Exception
+     *
      * @return Application|mixed|string|null
      */
     function translator(string $translator = null, string $key = null)
