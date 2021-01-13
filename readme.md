@@ -6,12 +6,12 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
 ## Introduction
-Laravel PackageTranslatorLoader is translations loader that will help to   
+Laravel Package Translator Loader is translations loader that will help to   
 translation your package fully (Finally about time, I would say!!!).
 
 
 ## Installation
-To get started, install ReComposer using the Composer package manager:
+To get started, install Package Translator Loader using the Composer package manager:
 ```shell
 composer require solumdesignum/package-translator-loader
 ```
@@ -29,16 +29,87 @@ return [
 ````
 
 # Usage
-TBA
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace SolumDeSignum\ThemeManager;
+
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
+use SolumDeSignum\PackageTranslatorLoader\PackageTranslatorLoader;
+
+class ExampleServiceProvider extends ServiceProvider
+{
+    /**
+     * @var PackageTranslatorLoader
+     */
+    private PackageTranslatorLoader $packageTranslatorLoader;
+
+    /**
+     * ExampleServiceProvider constructor.
+     *
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        parent::__construct($app);
+        $this->packageTranslatorLoader = new PackageTranslatorLoader(
+            $this->app,
+            [
+                'translator' => 'theme-manager.translator',
+                'nameSpace' => 'solumdesignum/theme-manager',
+                'packageRootPath' => __DIR__ . '/..',
+                'loadLangPath' => '/../resources/lang',
+                'loaderLangPath' => '/resources/lang',
+            ]
+        );
+    }
+}
+````
+
+# Usage: Accessing Translations
+```php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Internal package translations
+ * Even exceptions for both examples
+ */
+ 
+/**
+ * Internal Translator instance
+ * inside function get() should pass package name with translation key (package.translation-key)
+ */
+    $this->packageTranslatorLoader->trans()
+        ->get('theme-manager.invalid_argument_exception');
+        
+/**
+ * Helper: can be used in Blade, Controllers, Models, Services and etc...
+ * Inside first key must pass name of translator 
+ * Inside second key must pass package name with translation key (package.translation-key)
+ */
+translator(
+    'theme-manager.translator',
+    'theme-manager.invalid_argument_exception'
+);
+````
 
 ## Contributing
-Thank you for considering contributing to the Laravel PackageTranslatorLoader. You can read the contribution guidelines [here](constributing.md)
+Thank you for considering contributing to the Laravel Package Translator Loader. 
+You can read the contribution guidelines [here](contributing.md)
 
 ## Security
 If you discover any security-related issues, please email to [Solum DeSignum](mailto:oskars_germovs@inbox.lv).
 
-## Credits
+## Author
 - [Oskars Germovs](https://github.com/Faks)
 
+## About
+[Solum DeSignum](https://solum-designum.eu) is a web design agency based in Latvia, Riga.
+
 ## License
-Laravel PackageTranslatorLoader is open-sourced software licensed under the [MIT license](license.md)
+Laravel Package Translator Loader is open-sourced software licensed under the [MIT license](license.md)

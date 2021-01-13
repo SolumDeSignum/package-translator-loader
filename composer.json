@@ -1,6 +1,6 @@
 {
     "name": "solumdesignum/package-translator-loader",
-    "description": "Laravel PackageTranslatorLoader is translations loader.",
+    "description": "Laravel Package Translator Loader is translations loader for your package.",
     "keywords": [
         "laravel-package-translator-toade",
         "PackageTranslatorLoader",
