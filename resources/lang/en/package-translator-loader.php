@@ -3,5 +3,5 @@
 declare(strict_types=1);
 
 return [
-    'run' => "I am running.",
+    'run' => 'I am running.',
 ];

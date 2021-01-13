@@ -29,7 +29,7 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/package-translator-loader.php',
+            __DIR__.'/../config/package-translator-loader.php',
             'package-translator-loader'
         );
 
@@ -62,8 +62,7 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
         // Publishing the configuration file.
         $this->publishes(
             [
-                __DIR__ . '/../config/package-translator-loader.php' =>
-                    config_path('package-translator-loader.php'),
+                __DIR__.'/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
             ],
             'package-translator-loader'
         );

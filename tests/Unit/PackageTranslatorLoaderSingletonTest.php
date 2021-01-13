@@ -10,7 +10,6 @@ use SolumDeSignum\PackageTranslatorLoader\PackageTranslatorLoaderServiceProvider
 
 class PackageTranslatorLoaderSingletonTest extends TestCase
 {
-
     /**
      * @test
      */
@@ -24,7 +23,7 @@ class PackageTranslatorLoaderSingletonTest extends TestCase
                 'package-translator-loader.run'
             );
         self::assertIsString($__);
-        self::assertSame("I am running.", $__);
+        self::assertSame('I am running.', $__);
     }
 
     /**
@@ -40,8 +39,9 @@ class PackageTranslatorLoaderSingletonTest extends TestCase
                 'package-translator-loader.run'
             );
         self::assertIsString($__);
-        self::assertSame("Es strādāju.", $__);
+        self::assertSame('Es strādāju.', $__);
     }
+
     /**
      * @param Application $app
      *

@@ -8,7 +8,6 @@ use function app;
 use function config;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
-
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 
@@ -44,11 +43,11 @@ class PackageTranslatorLoader
     public function __construct(
         Application $app,
         array $config = [
-            'translator' => 'package-translation-loader.translator',
-            'nameSpace' => 'solumdesignum/package-translation-loader',
-            'packageRootPath' => __DIR__ . '/..',
-            'loadLangPath' => '/../resources/lang',
-            'loaderLangPath' => '/resources/lang',
+            'translator'      => 'package-translation-loader.translator',
+            'nameSpace'       => 'solumdesignum/package-translation-loader',
+            'packageRootPath' => __DIR__.'/..',
+            'loadLangPath'    => '/../resources/lang',
+            'loaderLangPath'  => '/resources/lang',
         ],
         ?string $locale = null
     ) {
@@ -74,7 +73,7 @@ class PackageTranslatorLoader
             function ($app) {
                 $trans = new Translator(
                     $this->loader(),
-                    (string)($this->locale !== null ?
+                    (string) ($this->locale !== null ?
                         $this->locale :
                         $this->locale(
                             $app
@@ -85,9 +84,10 @@ class PackageTranslatorLoader
                 );
                 $trans->addNamespace(
                     $this->config['nameSpace'],
-                    __DIR__ .
+                    __DIR__.
                     $this->config['loadLangPath']
                 );
+
                 return $trans;
             }
         );
@@ -145,8 +145,9 @@ class PackageTranslatorLoader
     private function loader(): FileLoader
     {
         $filesystem = new Filesystem();
-        $resourcesLangPath = $this->config['packageRootPath'] . $this->config['loaderLangPath'];
+        $resourcesLangPath = $this->config['packageRootPath'].$this->config['loaderLangPath'];
         $filesystem->allFiles($resourcesLangPath);
+
         return new FileLoader($filesystem, $resourcesLangPath);
     }
 }
