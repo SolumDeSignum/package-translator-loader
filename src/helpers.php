@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-use Illuminate\Contracts\Foundation\Application;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
-if (!\function_exists('translator')) {
+if (!function_exists('translator')) {
     /**
      * @param string|null $translator
      * @param string|null $key
      *
-     * @throws Exception
-     *
-     * @return Application|mixed|string|null
+     * @return mixed
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    function translator(string $translator = null, string $key = null)
+    function translator(string $translator = null, string $key = null): mixed
     {
         if ($translator !== null && $key === null) {
             throw new Exception(
