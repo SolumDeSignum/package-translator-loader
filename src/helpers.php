@@ -13,6 +13,7 @@ if (!function_exists('translator')) {
      * @return mixed
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
+     * @throws Exception
      */
     function translator(string $translator = null, string $key = null): mixed
     {
