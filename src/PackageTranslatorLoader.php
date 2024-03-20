@@ -9,18 +9,15 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 
-use function app;
-use function config;
-
 class PackageTranslatorLoader
 {
     public array $config;
 
     public ?string $locale = null;
 
-    private string $translator;
+    public string $translator;
 
-    private Application $app;
+    public Application $app;
 
     public function __construct(
         Application $app,
@@ -40,7 +37,7 @@ class PackageTranslatorLoader
         $this->loadTranslations();
     }
 
-    private function localeSetter(?string $locale): void
+    public function localeSetter(?string $locale): void
     {
         if ($locale !== null) {
             $this->locale = $locale;
@@ -49,7 +46,7 @@ class PackageTranslatorLoader
         }
     }
 
-    final public function setLocale(?string $locale = null): self
+    public function setLocale(?string $locale = null): self
     {
         $this->locale = $locale;
 
@@ -64,7 +61,7 @@ class PackageTranslatorLoader
      *
      * @return void
      */
-    final public function loadTranslations(): void
+    public function loadTranslations(): void
     {
         $this->app->bind(
             $this->translator,
@@ -91,7 +88,7 @@ class PackageTranslatorLoader
         );
     }
 
-    private function loader(): FileLoader
+    public function loader(): FileLoader
     {
         $filesystem = new Filesystem();
         $resourcesLangPath = $this->config['packageRootPath'] . $this->config['loaderLangPath'];
@@ -100,7 +97,7 @@ class PackageTranslatorLoader
         return new FileLoader($filesystem, $resourcesLangPath);
     }
 
-    private function locale(Application $app): string
+    public function locale(Application $app): string
     {
         return $app
             ->get('request')
@@ -109,7 +106,7 @@ class PackageTranslatorLoader
             ) ?: $app->getLocale();
     }
 
-    final public function trans(): mixed
+    public function trans(): mixed
     {
         return app($this->translator);
     }
