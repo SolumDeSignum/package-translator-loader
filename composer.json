@@ -42,10 +42,6 @@
             "SolumDeSignum\\PackageTranslatorLoader\\Tests\\": "tests"
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "phpunit --coverage-html coverage"
-    },
     "extra": {
         "laravel": {
             "providers": [
@@ -54,10 +50,6 @@
             "aliases": {
                 "PackageTranslatorLoader": "SolumDeSignum\\PackageTranslatorLoader\\Facades\\PackageTranslatorLoaderFacade"
             }
-        },
-        "branch-alias": {
-            "dev-master": "1.x-master",
-            "dev-dev": "1.x-dev"
         }
     },
     "config": {
