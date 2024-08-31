@@ -39,7 +39,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SolumDeSignum\\PackageTranslatorLoader\\Tests\\": "tests"
+            "SolumDeSignum\\PackageTranslatorLoader\\Tests\\": "tests/"
         }
     },
     "extra": {
