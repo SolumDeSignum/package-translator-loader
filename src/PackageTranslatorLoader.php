@@ -8,20 +8,18 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class PackageTranslatorLoader
 {
-    public array $config;
-
     public ?string $locale = null;
 
     public string $translator;
 
-    public Application $app;
-
     public function __construct(
-        Application $app,
-        array $config = [
+        public Application $app,
+        public array $config = [
             'translator' => 'package-translation-loader.translator',
             'nameSpace' => 'solumdesignum/package-translation-loader',
             'packageRootPath' => __DIR__ . '/..',
@@ -30,8 +28,6 @@ class PackageTranslatorLoader
         ],
         ?string $locale = null
     ) {
-        $this->app = $app;
-        $this->config = $config;
         $this->translator = $this->config['translator'];
         $this->localeSetter($locale);
         $this->loadTranslations();
@@ -39,27 +35,19 @@ class PackageTranslatorLoader
 
     public function localeSetter(?string $locale): void
     {
-        if ($locale !== null) {
-            $this->locale = $locale;
-        } else {
-            $this->setLocale();
-        }
+        $this->locale = $locale ?? $this->setLocale()->locale;
     }
 
     public function setLocale(?string $locale = null): self
     {
-        $this->locale = $locale;
-
+        $this->locale = $locale ?? $this->app->getLocale();
         return $this;
     }
 
     /**
      * Custom Translation Loader
-     *  When registering the translator component, we'll need to set the default
-     * locale as well as the fallback locale. So, we'll grab the application
-     * configuration so we can easily get both of these values from there.
-     *
-     * @return void
+     * Registers the translator component with the application.
+     * Sets the locale and fallback locale.
      */
     public function loadTranslations(): void
     {
@@ -68,19 +56,14 @@ class PackageTranslatorLoader
             function ($app) {
                 $trans = new Translator(
                     $this->loader(),
-                    (string)($this->locale !== null
-                        ? $this->locale
-                        : $this->locale($app))
+                    $this->locale ?? $this->locale($app)
                 );
-                $this->locale !== null
-                    ? $this->locale
-                    : $trans->setFallback(
-                    $app['config']['app.fallback_locale']
-                );
+                if ($this->locale !== null) {
+                    $trans->setFallback($app['config']['app.fallback_locale']);
+                }
                 $trans->addNamespace(
                     $this->config['nameSpace'],
-                    __DIR__ .
-                    $this->config['loadLangPath']
+                    $this->config['packageRootPath'] . $this->config['loadLangPath']
                 );
 
                 return $trans;
@@ -88,24 +71,43 @@ class PackageTranslatorLoader
         );
     }
 
+    /**
+     * Creates and returns a FileLoader instance.
+     *
+     * @return FileLoader
+     */
     public function loader(): FileLoader
     {
         $filesystem = new Filesystem();
         $resourcesLangPath = $this->config['packageRootPath'] . $this->config['loaderLangPath'];
-        $filesystem->allFiles($resourcesLangPath);
+
+        if (!is_dir($resourcesLangPath)) {
+            throw new \RuntimeException("Translation directory not found: $resourcesLangPath");
+        }
 
         return new FileLoader($filesystem, $resourcesLangPath);
     }
 
+    /**
+     * Determines the locale from the request or defaults to the application locale.
+     *
+     * @param Application $app
+     * @return string
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function locale(Application $app): string
     {
-        return $app
-            ->get('request')
-            ->segment(
-                config('package-translator-loader.segment', 1)
-            ) ?: $app->getLocale();
+        return $app->get('request')
+            ->segment(config('package-translator-loader.segment', 1))
+            ?: $app->getLocale();
     }
 
+    /**
+     * Retrieves the translator instance from the service container.
+     *
+     * @return mixed
+     */
     public function trans(): mixed
     {
         return app($this->translator);
