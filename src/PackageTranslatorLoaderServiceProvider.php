@@ -23,22 +23,6 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider implements 
     }
 
     /**
-     * Console-specific booting.
-     *
-     * @return void
-     */
-    protected function bootForConsole(): void
-    {
-        // Publishing the configuration file.
-        $this->publishes(
-            [
-                __DIR__ . '/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
-            ],
-            'package-translator-loader'
-        );
-    }
-
-    /**
      * Register any package services.
      *
      * @return void
@@ -64,5 +48,20 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider implements 
     public function provides(): array
     {
         return ['package-translator-loader'];
+    }
+
+    /**
+     * Console-specific booting.
+     *
+     * @return void
+     */
+    protected function bootForConsole(): void
+    {
+        // Publishing the configuration file.
+        $this->publishes([
+            __DIR__ . '/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
+        ],
+            'package-translator-loader'
+        );
     }
 }
