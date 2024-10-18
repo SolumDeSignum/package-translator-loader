@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace SolumDeSignum\PackageTranslatorLoader;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class PackageTranslatorLoaderServiceProvider extends ServiceProvider implements DeferrableProvider
+class PackageTranslatorLoaderServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
