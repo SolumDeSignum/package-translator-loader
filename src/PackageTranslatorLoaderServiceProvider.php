@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace SolumDeSignum\PackageTranslatorLoader;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class PackageTranslatorLoaderServiceProvider extends ServiceProvider
+class PackageTranslatorLoaderServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -22,22 +23,6 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
     }
 
     /**
-     * Console-specific booting.
-     *
-     * @return void
-     */
-    protected function bootForConsole(): void
-    {
-        // Publishing the configuration file.
-        $this->publishes(
-            [
-                __DIR__ . '/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
-            ],
-            'package-translator-loader'
-        );
-    }
-
-    /**
      * Register any package services.
      *
      * @return void
@@ -50,12 +35,9 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
         );
 
         // Register the service the package provides.
-        $this->app->singleton(
-            'package-translator-loader',
-            function ($app) {
-                return new PackageTranslatorLoader($app);
-            }
-        );
+        $this->app->singleton('package-translator-loader', function ($app) {
+            return new PackageTranslatorLoader($app);
+        });
     }
 
     /**
@@ -66,5 +48,20 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return ['package-translator-loader'];
+    }
+
+    /**
+     * Console-specific booting.
+     *
+     * @return void
+     */
+    protected function bootForConsole(): void
+    {
+        // Publishing the configuration file.
+        $this->publishes([
+            __DIR__ . '/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
+        ],
+            'package-translator-loader.config'
+        );
     }
 }
