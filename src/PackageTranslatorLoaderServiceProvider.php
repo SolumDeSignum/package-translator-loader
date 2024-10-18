@@ -61,7 +61,7 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider implements 
         $this->publishes([
             __DIR__ . '/../config/package-translator-loader.php' => config_path('package-translator-loader.php'),
         ],
-            'package-translator-loader'
+            'package-translator-loader.config'
         );
     }
 }
