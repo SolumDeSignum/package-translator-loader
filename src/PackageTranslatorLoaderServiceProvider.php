@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace SolumDeSignum\PackageTranslatorLoader;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class PackageTranslatorLoaderServiceProvider extends ServiceProvider
+class PackageTranslatorLoaderServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -50,12 +51,9 @@ class PackageTranslatorLoaderServiceProvider extends ServiceProvider
         );
 
         // Register the service the package provides.
-        $this->app->singleton(
-            'package-translator-loader',
-            function ($app) {
-                return new PackageTranslatorLoader($app);
-            }
-        );
+        $this->app->singleton('package-translator-loader', function ($app) {
+            return new PackageTranslatorLoader($app);
+        });
     }
 
     /**
